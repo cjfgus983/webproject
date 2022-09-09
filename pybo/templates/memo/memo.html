@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+{% block content %}
+<html>
+    <head>
+        <!--메모입력창 스크립트-->
+        <script src="C:\projects\myproject\pybo\static\jquery-3.5.1.min.js"></script>
+        <script>
+            function popupOpen(){
+                var $layerPopupObj = $('#popup');
+                var left = ( $(window).scrollLeft() + ($(window).width() - $layerPopupObj.width()) / 2 );
+                var top = ( $(window).scrollTop() + ($(window).height() - $layerPopupObj.height()) / 2 );
+                $layerPopupObj.css({'left':left,'top':top, 'position':'absolute'});
+                $('body').css('position','relative').append($layerPopupObj);
+
+                if(document.all.popup.style.visibility=="hidden") {
+                    document.all.popup.style.visibility="visible";
+                    bgLayerOpen();
+                    return false;
+                }else{
+                    document.all.popup.style.visibility="hidden";
+                    bgLayerClear();
+                    return false;
+                }
+
+            }
+
+            function bgLayerOpen() {
+                if(!$('.bgLayer').length) {
+                    $('<div class="bgLayer"></div>').appendTo($('body'));
+                }
+                var object = $(".bgLayer");
+                var w = $(document).width()+12;
+                var h = $(document).height();
+
+
+                object.css({'width':w,'height':h});
+                object.fadeIn(500);   //생성되는 시간 설정
+                $('html').css("overflow", "hidden");
+
+            }
+
+            function bgLayerClear(){
+                var object = $('.bgLayer');
+
+
+
+            if(object.length) {
+                object.fadeOut(500, function() {
+                object.remove();
+
+            });
+
+                }
+
+                $('html').css("overflow", "scroll");
+            }
+            $(function(){
+
+                $(window).resize(function() { //화면 크기 변할 시
+                    $('.bgLayer').css('width' ,  $(window).width() - 0 );
+                    $('.bgLayer').css('height' ,  $(window).height() - 0 );
+                });
+
+            });
+
+        </script>
+        <style type="text/css">
+            *{margin: 0;}
+            body{margin: 0 auto;}
+            /*메모 게시판 css*/
+            .warp{ height: 100%; width: 1000px; margin: 0 auto; padding: 0; display: flex; justify-content: flex-start; flex-direction: row; flex-wrap: wrap; align-content: space-around;}
+            .title{ width: 1000px; margin: 20px 0; margin-top: 40px; padding-bottom:5px; border-bottom: 2px solid #3A9D5F; color: #3A9D5F; background-color: white;}
+            .memo-button{display:block; height: 238px; width: 238px; text-align: center; margin: 5px; background-color: #3A9D5F; border-radius: 30px; color: white; border:0 solid white;}
+            .memo-box{display:flex; justify-content: center; align-content: center; height: 238px; width: 238px; text-align: center; margin: 5px; background-color: white; border-radius: 30px; color: #3A9D5F; border:1px solid #3A9D5F;}
+            .memo-box a{margin:auto; width: 200px; text-decoration: none; color: #3A9D5F; overflow: hidden; word-break: break-all;}
+            .memo-button:focus{outline:none;}
+            /*팝업창 css*/
+            #popup{overflow:hidden; height:400px; display:block; background-color: white; border:2px solid #3A9D5F; border-radius:40px; border-color: #3A9D5F; width:400px; z-index:100; position:absolute;  top:20%; left:10%;}
+            .close {display:block; margin-left: auto; padding-top:15px; padding-right:20px; padding-bottom: 10px; color:#3A9D5F; text-decoration: none;}
+            .textbox {display:flex; justify-content: center; flex-direction: column; }
+            .popCont{background: white; color: #3A9D5F; text-align: center;margin: auto;}
+            .popCont #memo{
+                height:250px; width:300px; display:block; margin:auto; font-size:12px; border:0 solid white; text-align: center;resize: none;
+            }
+            .popCont #submit{display:block; margin: auto; margin-top: 20px; background-color: #3A9D5F; border-radius: 30px; color: white; padding:5px 15px;border:0 solid white;}
+            .bgLayer {display:none;position:absolute; top:0; left:0; width:100%; height:100%; background:#000; opacity:.5; filter:alpha(opacity=50); z-index:10;}  /* z-index가 10이다. 이보다 위에 보이기 위해선 팝을 이보다 크게 설정해야한다. */
+            textarea:focus {outline: none;}
+            #click{background-color: #3A9D5F; border-color : #3A9D5F; color : white; font-weight : normal;}
+            .page-item a {color : #3A9D5F;}
+            .page-item a:hover {color : #3A9D5F; font-weight : bold;}
+            .disabled a {color : #3A9D5F;}
+            #numbox{margin-top: 15px;}
+        </style>
+    </head>
+    <body>
+        <!--메모 게시판 시작-->
+        <div class="warp">
+            <!--타이틀과 네이게이터 간격 조정은 title 스타일의 margin-top 조절-->
+            <div class="title">
+                <p>메모 게시판</p>
+            </div>
+            <button class="memo-button" onclick="popupOpen()" >메모 작성하기</button>
+            <!--if문으로 게시판 한 줄 씩 늘어나듯이 박스 늘어나는 문장 필요, 아래의 박스들은 하나씩 늘릴때마다 옆으로 늘어나고 4개가 넘으면 아래에서부터 다시 늘어납니다.-->
+            {% if memo_list %}
+                {% for memo in memo_list.items %}
+                <ul>
+                    <li class="memoli"><div class="memo-box"><a href="{{ url_for('memo.detail', memo_id=memo.memo_id) }}">{{ memo.content}}</a></div></li>
+
+                </ul>
+                {% endfor %}
+            {% else %}
+            <p>질문이 없습니다</p>
+            {% endif %}
+
+        </div>
+        <!--박스 늘어나는 문장 필요-->
+
+
+        <!--메모 게시판 끝-->
+
+        <!--팝업창 시작-->
+        <div class="popup" id="popup" style="position:absolute;  visibility:hidden;">
+                 <div class="textbox">
+                    <a href="#" class="close" onClick="javascript:popupOpen()">X</a></div>
+                    <form action="{{url_for('memo.create')}}"class="popCont" method="post">
+                        {{ form.csrf_token }}
+                        <textarea id="memo" type="text" name="content" rows="1"maxlength="200" placeholder="메모를 작성하시오." onfocus="this.placeholder=''" onblur="this.placeholder='메모를 작성하시오.'"></textarea>
+                        <div id="test_cnt" style="font-size:10pt";>최대 200자</div>
+                        <input type="submit" id="submit" name="저장" value="메모등록">
+                    </form>
+                </div>
+        </div>
+        <!--팝업창 끝-->
+    <!--페이징처리시작-->
+            <ul id="numbox" class="pagination justify-content-center">
+                <!--이전페이지-->
+                {% if memo_list.has_prev %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{memo_list.prev_num }}">이전</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+                </li>
+                {% endif %}
+                {% for page_num in memo_list.iter_pages() %}
+                    {% if page_num %}
+                        {% if page_num != memo_list.page %}
+                        <li class="page-item">
+                            <a class = "page-link" href="?page={{page_num}}">{{page_num}}</a>
+                        </li>
+                        {% else %}
+                        <li class="page-item active" aria-current="page">
+                            <a id="click" class="page-link" href="#">{{page_num}}</a>
+                        </li>
+                        {% endif %}
+                    {% else %}
+                        <li class="disabled">
+                            <a class="page-link" href="#">...</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                <!-- 다음페이지-->
+                {% if memo_list.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{memo_list.next_num}}">다음</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                        <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+                </li>
+                {% endif %}
+            </ul>
+            <!--페이징처리 끝-->
+    </body>
+</html>
+{% endblock %}

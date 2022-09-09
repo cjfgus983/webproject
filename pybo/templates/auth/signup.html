@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block content %}
+<html>
+    <head>
+        <style>
+            *{margin: 0; padding: 0;}
+            body{margin: 0;}
+            .warp{height: 100%; width: 1000px; margin: 0 auto; padding: 0; display: flex; justify-content: center; flex-direction: column; flex-wrap: wrap; align-content: center;}
+            .signIn{margin: auto; margin-top: 20px; display: flex; justify-content: center; flex-direction: column; flex-wrap: wrap; align-content: center; text-align: center;}
+            .signIn h3{margin-bottom: 20px; color: #3A9D5F;}
+            .form-box{margin: auto; margin-bottom: 20px;display: flex; justify-content: center; flex-direction: column; flex-wrap: wrap; align-content: center;}
+            .form-box label{font-weight: bold; margin-right:auto; font-size: 10pt; color: #3A9D5F;}
+            .form-text{height: 30px; width: 300px; margin-top: 10px; border-top: 0; border-left: 0; border-right: 0; border-bottom: 1pt solid #A1A1A1;}
+            .button{display:block; margin: auto; margin-top: 20px; margin-bottom: 10px;background-color: #3A9D5F; border-radius: 30px; color: white; padding:10px 20px;border:0}
+            input:focus {outline: none;}
+            button:focus {outline: none;}
+            select:focus {outline: none;}
+            select option[value=""][disabled] {display: none;}
+            .font1{font-family:"SCDream7";
+                    color: #3a9d5f;}
+            .form-text2{height: 30px; width: 300px;border: 0; margin-top: 10px; background-color: #3A9D5F; border-radius: 10px; color: white;}
+            </style>
+    </head>
+    <body>
+        <div class = "warp">
+            <form method="post" class="signIn">
+                {{ form.csrf_token }}
+                {% include "form_errors.html" %}
+                <h2 class="font1">회원가입</h2>
+                <div class="form-box">
+                    <label for="username">ID</label>
+                    <input type="text" class="form-text" name="username" id="username"
+                           value="{{ form.username.data or '' }}">
+                </div>
+                <div class="form-box">
+                    <label for="password1">PASSWORD</label>
+                    <input type="password" class="form-text" name="password1" id="password1"
+                           value="{{ form.password1.data or '' }}">
+                </div>
+                <div class="form-box">
+                    <label for="password2">Re-enter PASSWORD</label>
+                    <input type="password" class="form-text" name="password2" id="password2"
+                           value="{{ form.password2.data or '' }}">
+                </div>
+                <div class="form-box">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-text" name="email" id="email"
+                           value="{{ form.email.data or '' }}">
+                </div>
+                <div class="form-box">
+                    <label for="mbti">MBTI</label>
+                    <select class = "form-text2" name="mbti" id="mbti"
+                           value="{{ form.username.data or '' }}" required>
+                        <option value=" " disabled selected>선택하시오</option>
+                        <option value="ISTJ">ISTJ</option>
+                        <option value="ISFJ">ISFJ</option>
+                        <option value="INFJ">INFJ</option>
+                        <option value="INTJ">INTJ</option>
+                        <option value="ISTP">ISTP</option>
+                        <option value="ISFP">ISFP</option>
+                        <option value="INFP">INFP</option>
+                        <option value="INTP">INTP</option>
+                        <option value="ESTP">ESTP</option>
+                        <option value="ESFP">ESFP</option>
+                        <option value="ENFP">ENFP</option>
+                        <option value="ENTP">ENTP</option>
+                        <option value="ESTJ">ESTJ</option>
+                        <option value="ESFJ">ESFJ</option>
+                        <option value="ENFJ">ENFJ</option>
+                        <option value="ENTJ">ENTJ</option>
+                    </select>
+                </div>
+                <button type= "submit" class="button">생성하기</button>
+            </form>
+        </div>
+    </body>
+</html>
+{% endblock %}

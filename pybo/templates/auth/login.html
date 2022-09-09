@@ -1,0 +1,177 @@
+{% extends "base.html" %}
+{% block content %}
+
+   <html>
+        <head>
+
+
+            <style>
+            body{
+                font-family:"SCDream4";
+            }
+                header{
+                    display:flex;
+                    justify-content: center;
+                }
+
+                .wrap{
+                    width: 300px;
+                    border: 0;
+                    border-radius: 5px;
+                    background-color: white;
+                    padding: 10px;
+                    margin: 0 auto;
+                }
+
+                .input-box{
+                    position:relative;
+                    margin:10px 0;
+                }
+
+                .input-box > input{
+                    background:transparent;
+                    border:none;
+                    border-bottom: solid 1px #ccc;
+                    padding:20px 0px 5px 0px;
+                    font-size:14pt;
+                    width:100%;
+                }
+
+                input::placeholder{
+                    color:transparent;
+                }
+
+                input:placeholder-shown + label{
+                    display: block;
+                    color:#aaa;
+                    font-size:14pt;
+                    top:15px;
+                    position: center;
+                }
+
+                input:focus + label, label{
+                    color:#8aa1a1;
+                    font-size:10pt;
+                    pointer-events: none;
+                    position: absolute;
+                    left:0px;
+                    top:0px;
+                    transition: all 0.2s ease ;
+                    -webkit-transition: all 0.2s ease;
+                    -moz-transition: all 0.2s ease;
+                    -o-transition: all 0.2s ease;
+                }
+
+                input:focus, input:not(:placeholder-shown){
+                    outline:none;
+                }
+
+                input[type=submit]{
+                    display: block;
+                    background-color: #3a9d5f;
+                    border:none;
+                    color:white;
+                    border-radius: 20px;
+                    width:100px;
+                    height:35px;
+                    margin: 0 auto;
+                    font-size: 14pt;
+                    margin-top:50px;
+                }
+
+                #forgot{
+                    text-align: right;
+                    font-size:12pt;
+                    color:rgb(164, 164, 164);
+                    margin:10px 0px;
+                }
+
+                @font-face{
+                    src: url("../static/font/SCDream3.otf");
+                    font-family: "SCDream3";
+                }
+                @font-face{
+                    src: url("../static/font/SCDream4.otf");
+                    font-family: "SCDream4";
+                }
+                @font-face{
+                    src: url("WooridaumB.ttf");
+                    font-family: "WooridaumB";
+                }
+
+                .font1{
+                    font-family:"SCDream7";
+                    color: #3a9d5f;
+                    margin-top:15px;
+                }
+
+                .que{
+                    font-family: "SCDream4";
+                    color: #3a9d5f;
+                    font-size:3px;
+                }
+
+                button{
+                    display: block;
+                    background-color: #3a9d5f;
+                    border:none;
+                    color:white;
+                    border-radius: 20px;
+                    width:100px;
+                    height:35px;
+                    margin: 0 auto;
+                    font-size: 14pt;
+                    margin-top:50px;
+                }
+
+                .passwordforget{
+                    border:none;
+                    padding:20px 0px 5px 0px;
+                    font-size:8pt;
+                    width:100%;
+                    display: block;
+                    margin: 0 auto;
+                    width:160px;
+                    height:35px;
+                }
+                a{
+                    color: #206c1a;
+                }
+                a:visited{
+                    color: #206c1a;
+                    text-decoration-line: none;
+                }
+                a:hover{
+                    color: #c8e2c6;
+                    text-decoration-line: none;
+                }
+                a:active{
+                    color: #c8e2c6;
+                    text-decoration-line: none;
+                }
+
+            </style>
+        </head>
+        <body>
+            <header>
+                <h2 class="font1">로그인</h2>
+            </header>
+            <form method="post" class="wrap">
+                {{ form.csrf_token}}
+
+                <div class="input-box">
+                    <input id="username" type="text" name="username" placeholder="아이디" value="{{ form.username.data or '' }}">
+                    <label for="username">ID</label>
+                </div>
+                <div class="input-box">
+                <input id="password" type="password" name="password" placeholder="비밀번호" value="{{ form.password.data or '' }}">
+                <label for="password">PASSWORD</label>
+                </div>
+                <div class="passwordforget">
+                    <h4 class="que"> 아직 계정이 없으신가요? <a href="{{url_for('auth.signup')}}">회원가입</a></h4>
+                </div>
+                <button type="submit" class="login">LOGIN</button>
+            </form>
+        </body>
+    </html>
+{% endblock %}

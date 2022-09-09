@@ -1,0 +1,53 @@
+[33mcommit 39b0f4c46de292c581c0124eaf226dc4932ab3d5[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: 김철현 <cjfgus983@naver.com>
+Date:   Fri Sep 9 02:07:45 2022 +0900
+
+    config변경
+
+[33mcommit 92c4817c5eff159e3fa975cba54177d8672b3c23[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: 김철현 <cjfgus983@naver.com>
+Date:   Mon Jun 6 21:00:37 2022 +0900
+
+    '찐찐찐막'
+
+[33mcommit 4cff3c372e944fe352232b6f423f22d46e7b82c5[m
+Author: 김철현 <cjfgus983@naver.com>
+Date:   Mon Jun 6 20:45:42 2022 +0900
+
+    '찐찐막'
+
+[33mcommit e6ec51fa77e4ed98cadf043ca4446b499be683d5[m
+Author: 김철현 <cjfgus983@naver.com>
+Date:   Mon Jun 6 20:23:00 2022 +0900
+
+    '리얼찐막변경'
+
+[33mcommit 968b69298520a9281a528d98d91d3c65353eba5a[m
+Author: 김철현 <cjfgus983@naver.com>
+Date:   Mon Jun 6 20:18:41 2022 +0900
+
+    '진짜진짜마지막'
+
+[33mcommit 2e292bc03de66ea076e75106f6fda0551c8a758f[m
+Author: 김철현 <cjfgus983@naver.com>
+Date:   Mon Jun 6 19:25:19 2022 +0900
+
+    마지막 변경
+
+[33mcommit fbe72850cee4cdc3d92d595bc7ac573970d0fba9[m
+Author: 김철현 <cjfgus983@naver.com>
+Date:   Mon Jun 6 19:14:46 2022 +0900
+
+    리얼수정
+
+[33mcommit befa39c02a39e47f1f0953ea58dac11d848e1166[m
+Author: 김철현 <cjfgus983@naver.com>
+Date:   Sun May 29 13:44:41 2022 +0900
+
+    13주차 수정
+
+[33mcommit 0da813424443f7225cfd5bd8cbc3209fe722d919[m
+Author: 김철현 <cjfgus983@naver.com>
+Date:   Thu May 26 11:48:51 2022 +0900
+
+    파이보 프로젝트 최초 커밋

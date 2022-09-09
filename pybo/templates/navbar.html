@@ -1,0 +1,41 @@
+<!--내비게이션바-->
+<style>
+
+</style>
+
+<div class="box" style="display:inline-block;">
+    {% if g.user %}
+    <ur class="nav-container2">
+        <li class="nav-item2"><a href="{{ url_for('auth.logout') }}">{{ g.user.username }}(로그아웃)</a></li>
+    </ur>
+        {% else %}
+        <ur class="nav-container2">
+            <li class="nav-item2"><a href="{{ url_for('auth.signup') }}">회원가입</a></li>
+            <li class="nav-item2"><a href="{{ url_for('auth.login') }}">로그인</a></li>
+        </ur>
+        {% endif %}
+</div>
+<a href="{{url_for('main.index')}}"><div class = "main-image"></div></a>
+<div class="box" id="box321"style="text-align: center; display: inline-block;">
+
+        <header>
+            <div class="header">
+                            <nav role="navigation">
+                                <ul id="main-menu">
+                                  <li><a href="#" class="category">카테고리</a>
+                                    <ul id="sub-menu">
+                                      <li><a href="{{ url_for('question._list')}}" aria-label="subemnu">자유 게시판</a></li>
+                                      <li><a href="{{ url_for('memo._list')}}" aria-label="subemnu">메모 게시판</a></li>
+                                      <li><a href="{{ url_for('gomin._list')}}" aria-label="subemnu">고민 게시판</a></li>
+                                    </ul>
+                                  </li>
+                                  <li><a href="{{url_for('main.introduce')}}">소개</a></li>
+                                  <li><a href="{{url_for('main.alert')}}">공지</a></li>
+                                  <li><a href="{{url_for('main.call')}}">문의</a></li>
+                                </ul>
+                            </nav>
+            </div>
+        </header>
+</div>
+
+</header>

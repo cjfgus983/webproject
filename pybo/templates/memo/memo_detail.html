@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+    <head>
+
+        <style>
+
+            @font-face{
+                    src: url("/SCDream4.otf");
+                    font-family: "SCDream4";
+                }
+            *{margin: 0;
+            }
+            body{margin: 0 auto;}
+            .warp {height: 100%; width: 1000px; margin: 0 auto; padding: 0; display: flex; justify-content: center; flex-direction: column; flex-wrap: wrap; align-content: center;}
+            .title{ width: 1000px; margin: 20px 0; margin-top: 40px; padding-bottom:5px; border-bottom: 2px solid #3A9D5F; color: #3A9D5F; background-color: white;}
+            .memo-box {height: 400px; width: 400px; text-align: center; margin: auto; background-color: white; border-radius: 30px; color: #3A9D5F; border:1px solid #3A9D5F; display: flex; flex-direction: column; justify-content: space-around; align-content: space-around;}
+            .close {background-color: #3A9D5F; height: 50px; width:50px; border-radius: 100px; margin: auto; margin-top : 20px; display: flex; flex-direction: column; justify-content: space-around; align-content: space-around; overflow: hidden; word-break: break-all;}
+            .close a{margin: auto; color:white; text-decoration: none;}
+            .memo-detail{margin: auto; overflow: hidden; word-break: break-all;}
+
+
+            </style>
+    </head>
+    <body>
+
+        <div class="warp">
+            <div class="title">
+                <p>자세히</p>
+            </div>
+
+            <div class="memo-box">
+                <div class="memo-detail">
+                    {{ memo.content }}
+                </div>
+            </div>
+
+            <div class="close">
+                <a href="{{url_for('memo._list')}}">X</a>
+            </div>
+        </div>
+    </body>
+</html>
+{% endblock %}

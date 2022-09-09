@@ -1,0 +1,243 @@
+{% extends 'base.html' %}
+{% block content %}
+<head>
+    <script>
+        var index = 0;   //이미지에 접근하는 인덱스
+        window.onload = function(){
+            slideShow();
+        }
+
+        function slideShow() {
+        var i;
+        var x = document.getElementsByClassName("slide1");  //slide1에 대한 dom 참조
+        for (i = 0; i < x.length; i++) {
+           x[i].style.display = "none";   //처음에 전부 display를 none으로 한다.
+        }
+        index++;
+        if (index > x.length) {
+            index = 1;  //인덱스가 초과되면 1로 변경
+        }
+        x[index-1].style.display = "block";  //해당 인덱스는 block으로
+        setTimeout(slideShow, 4000);   //함수를 4초마다 호출
+
+        }
+
+        let curPos = 0;
+        let postion = 0;
+        const IMAGE_WIDTH = 640;
+        const prevBtn = document.querySelector(".prev")
+        const nextBtn = document.querySelector(".next")
+        const images = document.querySelector(".slides")
+
+        function prev(){
+          if(curPos > 0){
+            nextBtn.removeAttribute("disabled")
+            postion += IMAGE_WIDTH;
+            images.style.transform = `translateX(${postion}px)`;
+            curPos = curPos - 1;
+          }
+          if(curPos == 0){
+            prevBtn.setAttribute('disabled', 'true')
+          }
+        }
+        function next(){
+          if(curPos < 2){
+            prevBtn.removeAttribute("disabled")
+            postion -= IMAGE_WIDTH;
+            images.style.transform = `translateX(${postion}px)`;
+            curPos = curPos + 1;
+          }
+          if(curPos == 2){
+            nextBtn.setAttribute('disabled', 'true')
+          }
+        }
+
+        function init(){
+          prevBtn.setAttribute('disabled', 'true')
+          prevBtn.addEventListener("click", prev)
+          nextBtn.addEventListener("click", next)
+        }
+
+        init();
+    </script>
+    <style>
+            li{ list-style-type: none; }
+
+            #slideShow{position: relative;
+            margin-top:20px;
+            }
+
+            .slides{
+              position: relative;
+              display: flex;
+              justify-content: center;
+              height: auto;
+              border-radius:30px;
+              overflow:hidden;
+            }
+
+
+            .controller button{ position:absolute; background-color: transparent; color: black; height: 60px; width: 60px; text-align: center; vertical-align: center; border-radius: 100px; padding: auto; top: 50%; font-size: 1.3em; cursor: pointer; }
+
+            .controller button:hover{ background-color: rgba(128, 128, 128, 0.11); }
+
+            .prev{
+                left: 10px;
+            }
+
+            .prev:hover{ transform: translateX(-10px); }
+
+            .next{
+                right: 10px;
+            }
+
+            .next:hover{ transform: translateX(10px); }
+
+            .flex-box{height: auto; width: 1000px; margin: auto; padding: 0; display: flex; justify-content: center; flex-direction: column; align-content: flex-start;}
+            .flex-cont{height: auto; width: 1000px; margin: auto; padding: 0; display: flex; justify-content: flex-start; flex-direction: row; flex-wrap: wrap; align-content: flex-start;}
+            .free{display: flex; justify-content: flex-start; flex-direction: column; align-content: flex-start; margin: auto; width: 480px; margin-top: 10px; margin-bottom: 20px;}
+            .free-box{
+                border-bottom : 1px solid rgb(190, 190, 190);
+                padding: 5px 0 8px 5px;
+                width:480px;
+                height: auto;
+                font-size: 11pt;
+                text-decoration = none;
+            }
+            a{
+                text-decoration = none;
+            }
+            .free-box:hover {
+                text-decoration = none;
+            }
+            .gomin{display: flex; justify-content: flex-start; flex-direction: column; align-content: flex-start; margin: auto; width: 480px; margin-top: 10px; margin-bottom: 20px;}
+            .gomin-box{
+                border-bottom : 1px solid rgb(190, 190, 190);
+                margin: 0;
+                padding: 5px 0 8px 5px;
+                width:480px;
+                height: auto;
+                font-size: 11pt;
+            }
+            .memo{height: auto; width: 980px; display: flex; flex-direction: row; justify-content: flex-start; align-content: flex-start; margin: auto;}
+            .memo-box{
+                margin: auto;
+                margin-top: 12px;
+                margin-bottom: 12px;
+                background-color: white;
+                border: 1px solid #3A9D5F;
+                border-radius: 20px;
+                height: 170px;
+                width:170px;
+                font-size: 9pt;
+                padding: 5px;
+                display:flex; flex-direction: row; justify-content: center; align-content: center;
+            }
+            .memo-box a{color: #3A9D5F; margin: auto; overflow: hidden; word-break: break-all; text-align : center;}
+            .memo-box2{margin: auto; padding: 0;}
+            #col{flex-direction: column; justify-content: center;align-content: center;}
+            a{text-decoration: none; color: rgb(65, 65, 65);}
+            .miniBar{display: flex; flex-direction: row; justify-content: space-between; border-bottom: 2px solid #3A9D5F;}
+            .miniBar a{color: #3A9D5F;}
+            #subject{color : black; text-decoration:none;}
+        </style>
+</head>
+<body>
+        <section class="warp">
+            <div id = "slideShow">
+                <div class="slides">
+                    <img class="slide1" src="static/이벤트 배너1.png" width="1000px">
+                    <img class="slide1" src="static/이벤트 배너2.png" width="1000px">
+                    <img class="slide1" src="static/이벤트 배너3.png" width="1000px">
+                </div>
+
+            </div>
+
+                <div class="box3-1">
+                    <div class="box3-2"><a href="{{ url_for('question._list')}}"><img src="static/자유게시판.jpg" height="60px"></a></div>
+                    <div class="box3-2"><a href="{{ url_for('memo._list')}}"><img src="static/메모게시판.jpg" height="60px"></a></div>
+                    <div class="box3-2"><a href="{{ url_for('gomin._list')}}"><img src="static/고민게시판.jpg" height="60px"></a></div>
+                </div>
+            <div class ="flex-box">
+                <div class="flex-cont">
+                    <!--자유-->
+                    <div class="free">
+                        <div class="miniBar">
+                            <a href="#" onclick="return false;">자유게시판</a>
+                            <a href="{{ url_for('question._list')}}">+더보기</a>
+                        </div>
+                        {% if question_list %}
+                        {% for question in question_list.items %}
+                        <tr class="text-center">
+                            <td class="text-left">
+                                <a class = "free-box" id="subject" href="{{ url_for('question.detail',question_id=question.id)}}">{{ question.subject }}</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        {% else %}
+                        <tr>
+                            <td colspan="3">게시글이 없습니다.</td>
+                        </tr>
+                        {% endif %}
+                    </div>
+                    <!--자유-->
+                    <!--고민시작-->
+                    <div class="gomin">
+                        <div class="miniBar">
+                            <a href="#" onclick="return false;">고민게시판</a>
+                            <a href="{{ url_for('gomin._list')}}">+더보기</a>
+                        </div>
+                        {% if gomin_list %}
+                        {% for gomin in gomin_list.items %}
+                        <tr class="text-center">
+                            <td class="text-left">
+                                <a class="gomin-box" id="subject" href="{{ url_for('gomin.detail', gomin_id=gomin.id)}}">{{ gomin.subject }}</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        {% else %}
+                        <tr>
+                            <td colspan="3">고민이 없습니다.</td>
+                        </tr>
+                        {% endif %}
+                    </div>
+                    <!--고민끝-->
+                </div>
+                <!--메모-->
+                <div class="memo" id="col">
+                    <div class="miniBar">
+                        <a href="#" onclick="return false;">메모게시판</a>
+                        <a href="{{ url_for('memo._list')}}">+더보기</a>
+                    </div>
+                </div>
+                <div class ="memo">
+                    {% if memo_list %}
+                    {% for memo in memo_list.items %}
+                        <ul class="memo-box2">
+                            <li><div class="memo-box"><a href="{{ url_for('memo.detail', memo_id=memo.memo_id) }}">{{ memo.content}}</a></div></li>
+                        </ul>
+                    {% endfor %}
+                    {% else %}
+                    {% endif %}
+
+                </div>
+                <!--메모끝-->
+
+            </div>
+                <div class="box3-1">
+                    <div class="box3-3"><a href="https://www.16personalities.com/ko/%EB%AC%B4%EB%A3%8C-%EC%84%B1%EA%B2%A9-%EC%9C%A0%ED%98%95-%EA%B2%80%EC%82%AC"><img src="static/1)무료성격유형검사.jpg" width: 225px height="100px"></a></div>
+                    <div class="box3-3"><a href="https://ktestone.com/kapable.github.io/dringkingHabit/"><img src="static/2)술버릇테스트.jpg" width: 225px height="100px"></a></div>
+                    <div class="box3-3"><a href="https://ddooddoo.com/ko/games/squidgame/main/"><img src="static/3)오징어게임테스트.jpg" width: 225px height="100px"></a></div>
+                    <div class="box3-3"><a href="https://ktestone.com/kapable.github.io/flowerBTI/"><img src="static/4)플라워.jpg" width: 225px height="100px"></a></div>
+
+                </div>
+                <div class="box3-1">
+                    <div class="box3-3"><a href="https://mydohwa.forceteller.com/interactive/mydohwa"><img src="static/도화.jpg" width: 225px height="100px"></a></div>
+                    <div class="box3-3"><a href="https://decalcomanie.netlify.app/"><img src="static/동물.jpg" width: 225px height="100px"></a></div>
+                    <div class="box3-3"><a href="https://m.instazon.kr/page/mbti/"><img src="static/인스타.jpg" width: 225px height="100px"></a></div>
+                    <div class="box3-3"><a href="https://mindtest.travelmakerkorea.com/"><img src="static/현지인.jpg" width: 225px height="100px"></a></div>
+                </div>
+        </section>
+        <footer>
+        </footer>
+{% endblock %}
