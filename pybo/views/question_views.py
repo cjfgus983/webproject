@@ -52,7 +52,7 @@ def _list():
             .distinct()
 
     # 페이징
-    question_list = question_list.paginate(page, per_page=10)
+    question_list = question_list.paginate(page=page, per_page=10)
     return render_template('question/question_list.html', question_list=question_list, page=page, kw=kw, so=so)
 
 
