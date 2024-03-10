@@ -52,7 +52,7 @@ def _list():
             .distinct()
 
     # 페이징
-    gomin_list = gomin_list.paginate(page, per_page=10)
+    gomin_list = gomin_list.paginate(page=page, per_page=10)
     return render_template('gomin/gomin_list.html', gomin_list=gomin_list, page=page, kw=kw, so=so)
 
 
