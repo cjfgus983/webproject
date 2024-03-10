@@ -62,12 +62,12 @@ def index():
             .distinct()
 
     # 페이징
-    question_list = question_list.paginate(page, per_page=5)
+    question_list = question_list.paginate(page=page, per_page=5)
     #==========================================================메모
     page = request.args.get('page', type=int, default=1)
     form = memoForm()
     memo_list = memo_Question.query.order_by(memo_Question.memo_create_date.desc())
-    memo_list = memo_list.paginate(page, per_page=5)
+    memo_list = memo_list.paginate(page=page, per_page=5)
     #===========================================================고민
     page = request.args.get('page', type=int, default=1)
     kw = request.args.get('kw', type=str, default='')
@@ -106,7 +106,7 @@ def index():
             .distinct()
 
     # 페이징
-    gomin_list = gomin_list.paginate(page, per_page=5)
+    gomin_list = gomin_list.paginate(page=page, per_page=5)
     return render_template('mainpage/mainpage.html', question_list=question_list, memo_list=memo_list, gomin_list=gomin_list)
 
 
