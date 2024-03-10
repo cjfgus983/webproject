@@ -17,7 +17,7 @@ def _list():
     page=request.args.get('page', type=int, default = 1)
     form = memoForm()
     memo_list = memo_Question.query.order_by(memo_Question.memo_create_date.desc())
-    memo_list = memo_list.paginate(page,per_page=11)
+    memo_list = memo_list.paginate(page=page,per_page=11)
     return render_template('memo/memo.html',memo_list=memo_list, form=form)
 
 @bp.route('/detail/<int:memo_id>/')
